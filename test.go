@@ -83,28 +83,32 @@ func main() {
             }
         }
 
-        for k, s := range maxSolutions {
-            fmt.Println("solution", k + 1)
-            result := kill(monsters, s.kill)
-            resultColor := []byte{}
-            for key, value := range s.kill {
-                s.kill[key] = start + value
-            }
-            for key, value := range s.last {
-                s.last[key] = start + value
-            }
-            for _, value := range result {
-                resultColor = append(resultColor, intToColor[value])
-            }
-            resultStr := string(resultColor)
+        if len(maxSolutions) > 0 && maxSolutions[0].score == 0 {
+            fmt.Println("no solution")
+        } else {
+            for k, s := range maxSolutions {
+                fmt.Println("solution", k + 1)
+                result := kill(monsters, s.kill)
+                resultColor := []byte{}
+                for key, value := range s.kill {
+                    s.kill[key] = start + value
+                }
+                for key, value := range s.last {
+                    s.last[key] = start + value
+                }
+                for _, value := range result {
+                    resultColor = append(resultColor, intToColor[value])
+                }
+                resultStr := string(resultColor)
 
-            fmt.Println("score:", max)
-            //fmt.Println("left:", s.left)
-            //fmt.Println("right:", s.right)
-            fmt.Println("kill:", s.kill)
-            fmt.Println("result:", resultStr)
-            fmt.Println("last:", s.last)
-            fmt.Println("")
+                fmt.Println("score:", max)
+                //fmt.Println("left:", s.left)
+                //fmt.Println("right:", s.right)
+                fmt.Println("kill:", s.kill)
+                fmt.Println("result:", resultStr)
+                fmt.Println("last:", s.last)
+                fmt.Println("")
+            }
         }
 
         fmt.Println("************************************")
